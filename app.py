@@ -61,7 +61,7 @@ def listar_restaurantes():
     
 def ativar_restaurante():
     exibir_subtitulo("ATIVAR RESTAURANTE")
-    
+    alterar_status_restaurante()
     voltar_ao_menu()
     
 def finalizar_app():
@@ -79,6 +79,20 @@ def voltar_ao_menu():
 def exibir_subtitulo(texto):
     os.system("cls")
     print(f"== {texto} ==\n")
+    
+def alterar_status_restaurante():
+    exibir_subtitulo("Alterando status do restaurante")
+    nome_restaurante = input("Digite o nome do restaurante que desejá alterar o status: ")
+    restaurante_encontrado = False
+    
+    for restaurante in restaurantes:
+        if nome_restaurante == restaurante["nome"]:
+            restaurante_encontrado = True
+            restaurante["ativo"] = not restaurante["ativo"]
+            mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso" if restaurante["ativo"] else f"O restaurante {nome_restaurante} foi desativado com sucesso"
+            print(mensagem)
+    if not restaurante_encontrado:
+        print("O restaurante não foi encontrado")
     
 def main():
     os.system("cls")
