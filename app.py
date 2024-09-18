@@ -18,7 +18,7 @@ def exiber_menu():
     print("""
     [1] Cadastrar Restaurante
     [2] Listar restaurante
-    [3] Ativar restaurante
+    [3] Alterar status do restaurante
     [4] Sair
         """)
     try:
@@ -50,13 +50,15 @@ def cadastrar_novo_restaurante():
     
 def listar_restaurantes():
     exibir_subtitulo("LISTAGEM DE RESTAURANTE")
-    cont = 0
+    cabecalho = f'{"Nome do restaurante".ljust(23)} | {"Categoria".ljust(20)} | Status'
+    print(cabecalho)
+    print("=" * len(cabecalho))
+    
     for restaurante in restaurantes:
-        cont += 1
         nome_restaurante = restaurante["nome"]
         categoria = restaurante["categoria"]
-        ativo = restaurante["ativo"]
-        print(f"{cont} - {nome_restaurante} | {categoria} | {ativo}" ) 
+        ativo = "ativado" if restaurante["ativo"] else "desativado"
+        print(f" - {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}" ) 
     voltar_ao_menu()
     
 def ativar_restaurante():
@@ -78,7 +80,11 @@ def voltar_ao_menu():
     
 def exibir_subtitulo(texto):
     os.system("cls")
-    print(f"== {texto} ==\n")
+    linha = "=" * len(texto)
+    print(linha)
+    print(texto)
+    print(linha)
+    print()
     
 def alterar_status_restaurante():
     exibir_subtitulo("Alterando status do restaurante")
