@@ -1,6 +1,9 @@
 import os
 
-restaurantes = ["Burguer Queen", "Galo Frito", "SpookBuguer"]
+restaurantes = [{"nome":"Burguer Queen", "categoria":"Lanchonete", "ativo":False}, 
+                {"nome":"Galo Frito", "categoria":"Self-Service", "ativo":True}, 
+                {"nome":"SpookBuguer", "categoria":"Lanchonete", "ativo":True}
+]
 
 def exibe_nome_do_programa():
     print("""
@@ -48,7 +51,10 @@ def listar_restaurantes():
     cont = 0
     for restaurante in restaurantes:
         cont += 1
-        print(f"{cont} - {restaurante}") 
+        nome_restaurante = restaurante["nome"]
+        categoria_restaurante = restaurante["categoria"]
+        ativo = restaurante["ativo"]
+        print(f"{cont} - {nome_restaurante} | {categoria_restaurante} | {ativo}" ) 
     voltar_ao_menu()
     
 def ativar_restaurante():
