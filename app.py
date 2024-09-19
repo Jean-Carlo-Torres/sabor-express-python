@@ -1,9 +1,12 @@
 import os
 
-restaurantes = [{"nome":"Burguer Queen", "categoria":"Lanchonete", "ativo":False}, 
-                {"nome":"Galo Frito", "categoria":"Self-Service", "ativo":True}, 
-                {"nome":"SpookBuguer", "categoria":"Lanchonete", "ativo":True}
-]
+from models.restaurante import Restaurante
+
+restaurante1 = Restaurante("Burguer Queen", "Lanchonete")
+restaurante2 = Restaurante("Galo Frito", "Self-Service")
+restaurante3 = Restaurante("SpookBuguer", "Lanchonete")
+
+restaurantes = [restaurante1, restaurante2, restaurante3]
 
 def exibe_nome_do_programa():
     print("""
@@ -55,9 +58,9 @@ def listar_restaurantes():
     print("=" * len(cabecalho))
     
     for restaurante in restaurantes:
-        nome_restaurante = restaurante["nome"]
-        categoria = restaurante["categoria"]
-        ativo = "ativado" if restaurante["ativo"] else "desativado"
+        nome_restaurante = restaurante.nome
+        categoria = restaurante.categoria
+        ativo = "ativado" if restaurante.ativo == True else "desativado"
         print(f" - {nome_restaurante.ljust(20)} | {categoria.ljust(20)} | {ativo}" ) 
     voltar_ao_menu()
     
@@ -92,10 +95,10 @@ def alterar_status_restaurante():
     restaurante_encontrado = False
     
     for restaurante in restaurantes:
-        if nome_restaurante == restaurante["nome"]:
+        if nome_restaurante == restaurante.nome:
             restaurante_encontrado = True
-            restaurante["ativo"] = not restaurante["ativo"]
-            mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso" if restaurante["ativo"] else f"O restaurante {nome_restaurante} foi desativado com sucesso"
+            restaurante.ativo = not restaurante.ativo
+            mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso" if restaurante.ativo == True else f"O restaurante {nome_restaurante} foi desativado com sucesso"
             print(mensagem)
     if not restaurante_encontrado:
         print("O restaurante não foi encontrado")
@@ -108,8 +111,3 @@ def main():
 if __name__ == '__main__':
     main()
     
-
-
-
-
-
