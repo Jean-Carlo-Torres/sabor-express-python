@@ -3,13 +3,29 @@ import os
 class Restaurante:
     restaurantes = []
     def __init__(self, nome, categoria):
-        self.nome = nome
-        self.categoria = categoria
-        self.ativo = False
+        self.__nome = nome.title()
+        self.__categoria = categoria.upper()
+        self.__ativo = False
         Restaurante.restaurantes.append(self)
+        
+    @property
+    def nome(self):
+        return self.__nome
+    
+    @property
+    def categoria(self):
+        return self.__categoria
+    
+    @property
+    def ativo(self):
+        return self.__ativo
+    
+    @ativo.setter
+    def ativo(self, valor):
+        self.__ativo = valor
     
     def __str__(self):
-        return self.nome
+        return self.__nome
 
 def cadastrar_novo_restaurante():
     exibir_subtitulo("CADASTRO DE RESTAURANTE")
@@ -50,7 +66,7 @@ def alterar_status_restaurante():
     restaurante_encontrado = False
 
     for restaurante in Restaurante.restaurantes:
-        if nome_restaurante == restaurante.nome:
+        if nome_restaurante.lower() == restaurante.nome.lower():
             restaurante_encontrado = True
             restaurante.ativo = not restaurante.ativo
             mensagem = f"O restaurante {nome_restaurante} foi ativado com sucesso" if restaurante.ativo == True else f"O restaurante {nome_restaurante} foi desativado com sucesso"
